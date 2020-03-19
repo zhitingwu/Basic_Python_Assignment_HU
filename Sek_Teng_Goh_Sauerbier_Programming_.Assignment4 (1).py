@@ -71,7 +71,7 @@ with open("mind_brain_peeps.csv","w", encoding = "cp1252") as file:
             #gets the value of the keys based on fieldset and write to csv
         file.write("\n")
     
-"""The additional code below is the replace 'None' in the mind_brain_peeps.csv file to spacing.
+"""The additional code below is t0 replace 'None' in the mind_brain_peeps.csv file to spacing.
 This makes the file looks neater."""     
 
 with open("mind_brain_peeps.csv", "r") as file, open("mindbrainpeeps.csv", "w") as final_version: 
