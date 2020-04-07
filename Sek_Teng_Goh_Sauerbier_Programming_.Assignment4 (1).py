@@ -30,7 +30,7 @@ response = session.get('http://www.mind-and-brain.de/people/faculty/')#, headers
 doc = BeautifulSoup(response.text, 'html.parser')
 
 fields_1 = doc.find_all("th")
-fieldset = set() #removes duplicate items
+fieldset = set() #set into distinct and sorted elements 
 for fielding in fields_1:
     fieldset.add(fielding.text)
 fieldset.remove("E-mail")
@@ -40,6 +40,7 @@ print(fieldset)
 results = doc.find_all("div",{"class":"researchers-list-item-full"})
 
 with open("mind_brain_peeps.csv","w", encoding = "cp1252") as file:
+"""Creates new file"""
     file.write("Name,") #1st row 1st column 
     for field_2 in fieldset:
         file.write(f"{field_2},") #write rows' headers 
