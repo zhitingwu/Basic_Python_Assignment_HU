@@ -20,7 +20,7 @@ Encoding cp1252
 
 """
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup #https://realpython.com/beautiful-soup-web-scraper-python/
 
 # Create a new http session
 session = requests.Session()
@@ -30,7 +30,7 @@ response = session.get('http://www.mind-and-brain.de/people/faculty/')#, headers
 doc = BeautifulSoup(response.text, 'html.parser')
 
 fields_1 = doc.find_all("th")
-fieldset = set() #set into distinct and sorted elements 
+fieldset = set() #https://www.geeksforgeeks.org/python-set-method/
 for fielding in fields_1:
     fieldset.add(fielding.text)
 fieldset.remove("E-mail")
@@ -76,6 +76,8 @@ with open("mind_brain_peeps.csv","w", encoding = "cp1252") as file:
 This makes the file looks neater."""     
 
 with open("mind_brain_peeps.csv", "r") as file, open("mindbrainpeeps.csv", "w") as final_version: 
+#https://www.geeksforgeeks.org/python-pandas-dataframe-fillna-to-replace-null-values-in-dataframe/
+
     for f in file: 
         file = f.replace("None", " ") #to replace None in CSV file to space
         final_version.writelines(file)
