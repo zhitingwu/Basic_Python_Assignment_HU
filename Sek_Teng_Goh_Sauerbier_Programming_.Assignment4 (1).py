@@ -16,7 +16,12 @@ For each faculty member, all of the information that is displayed in their
 detail view (Function, Current status, Research area, etc.) are saved
 in the CSV file, except for their phone number and email address. 
 
-Encoding cp1252
+Please note that there will be 2 csv files generated. One file with 'None' for for data not available in certain colums
+and another file with empty space or " " for the same data. 
+
+Encoding:  cp1252
+
+
 
 """
 import requests
@@ -33,8 +38,9 @@ fields_1 = doc.find_all("th")
 fieldset = set() #https://www.geeksforgeeks.org/python-set-method/
 for fielding in fields_1:
     fieldset.add(fielding.text)
-fieldset.remove("E-mail")
-fieldset.remove("Phone")#exclude email and phone 
+    fieldset.remove("E-mail")
+    fieldset.remove("Phone")#exclude email and phone 
+
 print(fieldset)
 
 results = doc.find_all("div",{"class":"researchers-list-item-full"})
@@ -72,7 +78,7 @@ with open("mind_brain_peeps.csv","w", encoding = "cp1252") as file:
             #gets the value of the keys based on fieldset and write to csv
         file.write("\n")
     
-"""The additional code below is t0 replace 'None' in the mind_brain_peeps.csv file to spacing.
+"""The additional code below is to replace 'None' in the mind_brain_peeps.csv file to spacing.
 This makes the file looks neater."""     
 
 with open("mind_brain_peeps.csv", "r") as file, open("mindbrainpeeps.csv", "w") as final_version: 
