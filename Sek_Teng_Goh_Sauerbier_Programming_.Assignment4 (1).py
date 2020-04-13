@@ -1,8 +1,7 @@
 
 """
 Created on Tue Feb 25 08:30:51 2020
-
-@author: zhiting (sek teng)
+@author: (sek teng)
 """
 """ Webscraping
 Scraping website : http://www.mind-and-brain.de/people/faculty/
@@ -14,15 +13,14 @@ web page and saves their information into a spreadsheet file.
 
 For each faculty member, all of the information that is displayed in their 
 detail view (Function, Current status, Research area, etc.) are saved
-in the CSV file, except for their phone number and email address. 
-
-Please note that there will be 2 csv files generated. One file with 'None' for for data not available in certain colums
-and another file with empty space or " " for the same data. 
+in the CSV file, except for their phone number and email address.
+ 
+Please note that there will be 2 csv files generated in your working directory. 
+One file named "mind_and_brain_peeps.csv" with 'None' for for data not available 
+in certain columns and another file named "mindandbrainpeeps.csv" with 
+empty space or " " to replace "None" for the same data. 
 
 Encoding:  cp1252
-
-
-
 """
 import requests
 from bs4 import BeautifulSoup #https://realpython.com/beautiful-soup-web-scraper-python/
@@ -38,15 +36,14 @@ fields_1 = doc.find_all("th")
 fieldset = set() #https://www.geeksforgeeks.org/python-set-method/
 for fielding in fields_1:
     fieldset.add(fielding.text)
-    fieldset.remove("E-mail")
-    fieldset.remove("Phone")#exclude email and phone 
+fieldset.remove("E-mail")
+fieldset.remove("Phone")#exclude email and phone 
 
 print(fieldset)
 
 results = doc.find_all("div",{"class":"researchers-list-item-full"})
 
-with open("mind_brain_peeps.csv","w", encoding = "cp1252") as file:
-"""Creates new file"""
+with open("mind_brain_peeps.csv","w", encoding = "cp1252") as file: #creates new file
     file.write("Name,") #1st row 1st column 
     for field_2 in fieldset:
         file.write(f"{field_2},") #write rows' headers 
